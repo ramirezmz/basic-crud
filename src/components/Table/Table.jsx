@@ -1,19 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
 import Table from 'react-bootstrap/Table';
-import storage from '../../data/db.json';
 import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
+function TableComponent() {
+  const userList = useSelector((state) => (state.user.value))
 
-function BasicExample() {
-  
   const editFnc = (id) => {
     console.log(id)
   }
   
-  const removeFnc = (index) => {
-    storage.splice(index, 1)
-    console.log(storage)
+  const removeFnc = (id) => {
+    console.log('oii', id)
   }
 
   return (
@@ -28,7 +27,7 @@ function BasicExample() {
       </thead>
       <tbody>
         {
-          storage.map(({id, name, lastName}) => (
+          userList.map(({id, name, lastName}) => (
             <tr key={id}>
               <td>{id}</td>
               <td>{name}</td>
@@ -53,4 +52,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default TableComponent;
