@@ -1,11 +1,23 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from 'react';
-import InputGroupComponent from '../Input/InputGroup';
+import { useSelector, useDispatch } from 'react-redux';
+import { addUser } from '../../utils/Users';
 
 function VerticalCenteredModal(props) {
-  const saveData = () => {
-    console.log('Salvando')
+  const [name, setName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const userList = useSelector((state) => (state.user.value))
+  const dispatch = useDispatch()
+  const handleData = () => {
+    dispatch(addUser({
+      id: userList[userList.length - 1].id + 1,
+      name,
+      lastName
+    }))
+    props.onHide()
   }
 
   return (
@@ -13,19 +25,34 @@ function VerticalCenteredModal(props) {
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+      centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Novo Cadastro
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Prencha os dados completos</h4>
-        <InputGroupComponent />
+        <InputGroup className="mb-3">
+        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+        <Form.Control
+          placeholder="Name"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          onChange={(event) => setName(event.target.value)}
+        />
+      </InputGroup>
+      <InputGroup className="mb-3">
+        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+        <Form.Control
+          placeholder="Last Name"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          onChange={(event) => setLastName(event.target.value)}
+        />
+      </InputGroup>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={saveData}>Salvar</Button>
+        <Button onClick={handleData}>Salvar</Button>
         <Button variant='danger' onClick={props.onHide}>Fechar</Button>
       </Modal.Footer>
     </Modal>
