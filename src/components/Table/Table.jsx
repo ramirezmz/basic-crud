@@ -2,9 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteUser } from '../../utils/Users';
 
 function TableComponent() {
+  const dispatch = useDispatch()
   const userList = useSelector((state) => (state.user.value))
 
   const editFnc = (id) => {
@@ -12,7 +14,7 @@ function TableComponent() {
   }
   
   const removeFnc = (id) => {
-    console.log('oii', id)
+    dispatch(deleteUser({id: id}))
   }
 
   return (
