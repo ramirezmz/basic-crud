@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUser } from '../../utils/Users';
+import ModalComponent from '../Modal/Modal';
 
 function TableComponent() {
   const dispatch = useDispatch()
@@ -35,11 +36,10 @@ function TableComponent() {
               <td>{name}</td>
               <td>{lastName}</td>
               <td className='table-actions'>
-                <Button
-                variant='primary'
-                onClick={() => editFnc(id)}>
-                  Editar
-                </Button>
+                <ModalComponent 
+                  modalName="Editar"
+                  variant='primary'
+                  />
                 <Button
                   variant='danger'
                   onClick={() => removeFnc(id)}>

@@ -59,13 +59,13 @@ function VerticalCenteredModal(props) {
   );
 }
 
-const ModalComponent = () => {
+const ModalComponent = ({modalName, variant}) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
     <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-        Adicionar
+      <Button variant={variant} onClick={() => setModalShow(true)}>
+        {modalName}
       </Button>
 
       <VerticalCenteredModal

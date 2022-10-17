@@ -10,7 +10,7 @@ const Home = () => {
       <Row>
         <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: '2rem'}}>
           <h2>Gostaria de adicionar alguém mais?</h2>
-          <ModalComponent />
+          <ModalComponent modalName="Adicionar" variant="primary"/>
         </Container>
       <TableComponent />
       </Row>
