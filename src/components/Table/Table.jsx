@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteUser } from '../../utils/Users';
 import { useState } from 'react';
 import ModalContent from '../Modal/ModalContent';
+import { BiEditAlt } from "react-icons/bi";
+import {FiTrash2} from 'react-icons/fi'
+
 
 function TableComponent() {
   const [modalShow, setModalShow] = useState(false)
@@ -17,7 +20,7 @@ function TableComponent() {
   const removeFnc = (id) => dispatch(deleteUser({id: id}))
 
   return (
-    <Table striped bordered hover className='table-content'>
+    <Table striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
@@ -35,6 +38,7 @@ function TableComponent() {
               <td>{lastName}</td>
               <td className='table-actions'>
                 <Button
+                  style={{ margin: '.2rem'}}
                   variant='primary'
                   onClick={() => {
                     setModalShow(true)
@@ -46,7 +50,7 @@ function TableComponent() {
                     })
                   }}
                   >
-                  Editar
+                  <BiEditAlt/>
                 </Button>
                 <ModalContent
                   show={modalShow}
@@ -57,7 +61,7 @@ function TableComponent() {
                 <Button
                   variant='danger'
                   onClick={() => removeFnc(id)}>
-                    Remover
+                    <FiTrash2 />
                 </Button>
               </td>
             </tr>
