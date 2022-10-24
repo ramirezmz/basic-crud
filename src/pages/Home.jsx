@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <Container fluid="md">
       <Row>
-        <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: '2rem'}}>
+        <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: '2rem 0'}}>
           <h2>Would you like to add more?</h2>
           <ModalComponent modalName="Adicionar" variant="primary"/>
         </Container>

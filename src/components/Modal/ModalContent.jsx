@@ -11,7 +11,6 @@ function ModalContent(props) {
   const [newLastName, setNewLastName] = useState('')
   const dispatch = useDispatch()
 
-  console.log(props.person)
   const handleUpdateData = () => {
     dispatch(updateUser({
       id: props.person.id,
