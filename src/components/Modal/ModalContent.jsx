@@ -1,22 +1,22 @@
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addUser } from '../../utils/Users';
+import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
+import {updateUser} from '../../utils/Users'
 
-function VerticalCenteredModal(props) {
-  const [name, setName] = useState("")
-  const [lastName, setLastName] = useState("")
-
-  const userList = useSelector((state) => (state.user.value))
+function ModalContent(props) {
+  const [newName, setNewName] = useState('')
+  const [newLastName, setNewLastName] = useState('')
   const dispatch = useDispatch()
-  const handleData = () => {
-    dispatch(addUser({
-      id: userList[userList.length - 1].id + 1,
-      name,
-      lastName
+
+  console.log(props.person)
+  const handleUpdateData = () => {
+    dispatch(updateUser({
+      id: props.person.id,
+      name: newName,
+      lastName: newLastName
     }))
     props.onHide()
   }
@@ -29,7 +29,7 @@ function VerticalCenteredModal(props) {
       centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Novo Cadastro
+          Atualizar Cadastro
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -39,7 +39,8 @@ function VerticalCenteredModal(props) {
           placeholder="Name"
           aria-label="Username"
           aria-describedby="basic-addon1"
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event) => setNewName(event.target.value)}
+          defaultValue={props.person.name}
         />
       </InputGroup>
       <InputGroup className="mb-3">
@@ -48,32 +49,17 @@ function VerticalCenteredModal(props) {
           placeholder="Last Name"
           aria-label="Username"
           aria-describedby="basic-addon1"
-          onChange={(event) => setLastName(event.target.value)}
+          onChange={(event) => setNewLastName(event.target.value)}
+          defaultValue={props.person.lastName}
         />
       </InputGroup>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleData}>Salvar</Button>
+        <Button onClick={handleUpdateData}>Salvar</Button>
         <Button variant='danger' onClick={props.onHide}>Fechar</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-const ModalComponent = ({modalName, variant}) => {
-  const [modalShow, setModalShow] = useState(false);
-
-  return (
-    <>
-      <Button variant={variant} onClick={() => setModalShow(true)}>
-        {modalName}
-      </Button>
-
-      <VerticalCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-    </>
-  );
-}
-export default ModalComponent
+export default ModalContent

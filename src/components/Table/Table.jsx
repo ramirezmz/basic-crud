@@ -4,19 +4,17 @@ import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUser } from '../../utils/Users';
-import ModalComponent from '../Modal/Modal';
+import { useState } from 'react';
+import ModalContent from '../Modal/ModalContent';
 
 function TableComponent() {
+  const [modalShow, setModalShow] = useState(false)
+  const [getId, setGetId] = useState(0)
+  const [ person, setPerson ] = useState({})
   const dispatch = useDispatch()
   const userList = useSelector((state) => (state.user.value))
 
-  const editFnc = (id) => {
-    console.log(id)
-  }
-  
-  const removeFnc = (id) => {
-    dispatch(deleteUser({id: id}))
-  }
+  const removeFnc = (id) => dispatch(deleteUser({id: id}))
 
   return (
     <Table striped bordered hover className='table-content'>
@@ -36,10 +34,26 @@ function TableComponent() {
               <td>{name}</td>
               <td>{lastName}</td>
               <td className='table-actions'>
-                <ModalComponent 
-                  modalName="Editar"
+                <Button
                   variant='primary'
-                  />
+                  onClick={() => {
+                    setModalShow(true)
+                    setGetId(id)
+                    setPerson({
+                      id,
+                      name,
+                      lastName
+                    })
+                  }}
+                  >
+                  Editar
+                </Button>
+                <ModalContent
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                  id={getId}
+                  person={person}
+                />
                 <Button
                   variant='danger'
                   onClick={() => removeFnc(id)}>
