@@ -1,13 +1,15 @@
 # Basic CRUD
-
-<img  src="./public/project.png" />
+<p align="center">
+    <img src="./public/project.png" />
+</p>
 
 It's about CRUD, for those who dont't know CRUD is the composition of the first letter of 4 basic functions of a system that works with a database.
 
-C = Create
-R = Read
-U = Update
-D = Delete
+- C = Create
+- R = Read
+- U = Update
+- D = Delete
+
 ## How to run the project?
 
 1. Clone the repo
